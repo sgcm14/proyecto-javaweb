@@ -24,25 +24,24 @@
   
    <form action="alumnodb" method="post" class="form-signin">
    
-   <c:forEach var="datosalumno" items="${listaAlumno}">
+ 
    
    <input type="hidden" class="form-control" name="opcion" value="actualizar">
-   <input type="hidden" class="form-control" name="id" value="${datosalumno.id}">
+   <input type="hidden" class="form-control" name="id" value="${Alumno.id}">
    <h1>Modificar Alumno</h1><br>
   <div class="form-group">
     <label>Nombres</label>
-    <input type="text" class="form-control" name="nombres" value="${datosalumno.nombres}">
+    <input type="text" class="form-control" name="nombres" value="${Alumno.nombres}">
   </div>
   <div class="form-group">
     <label>Apellidos</label>
-    <input type="text" class="form-control" name="apellidos" value="${datosalumno.apellidos}">
+    <input type="text" class="form-control" name="apellidos" value="${Alumno.apellidos}">
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Email</label>
-    <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" value="${datosalumno.email}">
+    <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" value="${Alumno.email}">
   </div>
   
-  </c:forEach>
   <!-- <div class="form-group form-check">
     <input type="checkbox" class="form-check-input" id="exampleCheck1">
     <label class="form-check-label" for="exampleCheck1">Check me out</label>

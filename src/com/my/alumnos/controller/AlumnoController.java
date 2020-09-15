@@ -35,10 +35,12 @@ public class AlumnoController extends HttpServlet {
 		//eliminarAlumno()
 		//default
 		//listartAlumno()
-		String opcion = "";
+		/*String opcion = "";
 		opcion = request.getParameter("opcion");
+		*/
+		String opcion = (request.getParameter("opcion") != null) ? request.getParameter("opcion") : "";
 		
-		try {
+		//try {
 		switch(opcion) {
 		 case "modificar": 
 			 this.editarAlumno(request, response);
@@ -46,14 +48,14 @@ public class AlumnoController extends HttpServlet {
 		 case "eliminar": 
 			 this.eliminarAlumno(request, response);
 			 break;
-		 default: this.listarAlumno(request, response);
+		 default: this.listarAlumnos(request, response);
 		 	break;
 			}
-		}catch (Exception e) {
+		/*}catch (Exception e) {
 			
 			e.printStackTrace();
 			this.listarAlumno(request, response);
-		}
+		}*/
 		
 		
 	}
@@ -65,26 +67,25 @@ public class AlumnoController extends HttpServlet {
 		Alumno alumno =new Alumno();
 		String id = request.getParameter("id");
 		alumno.setId(Integer.parseInt(id));
-		daoAlumno.deleteAlumnos(alumno);
-			
-		RequestDispatcher dispatcher = request.getRequestDispatcher("alumnodb");
-		dispatcher.forward(request, response);
+		daoAlumno.deleteAlumno(alumno);
+		response.sendRedirect("alumnodb");
 	}
 	
 	private void editarAlumno(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		AlumnoDAO daoAlumno = new AlumnoDAO();
 		Alumno alumno =new Alumno();
 		String id = request.getParameter("id");
-		alumno.setId(Integer.parseInt(id));
-		List<Alumno> datosalumno = daoAlumno.getAlumno(alumno);
+		alumno.setId(Integer.parseInt(id));//no list xd y modificar metodos xD
+		//List<Alumno> datosalumno = daoAlumno.getAlumno(alumno);
+		Alumno datosalumno=daoAlumno.getAlumno(alumno);
 			
-		request.setAttribute("listaAlumno", datosalumno);
+		request.setAttribute("Alumno", datosalumno);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/modificar_alumno.jsp");
 		dispatcher.forward(request, response);
 	}
 	
 	
-	private void listarAlumno(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	private void listarAlumnos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		AlumnoDAO daoAlumno = new AlumnoDAO();
 		List<Alumno> alumnos = daoAlumno.getAlumnos();
 		
@@ -108,13 +109,13 @@ public class AlumnoController extends HttpServlet {
 				alumno.setEmail(correo);
 				
 				if(opcion.equals("insertar")) {
-					daoAlumno.saveAlumnos(alumno);
+					daoAlumno.saveAlumno(alumno);
 					response.sendRedirect("alumnodb");
 					
 				} else if(opcion.equals("actualizar")) {
 					String id = request.getParameter("id");
 					alumno.setId(Integer.parseInt(id));
-					daoAlumno.updateAlumnos(alumno);
+					daoAlumno.updateAlumno(alumno);
 					response.sendRedirect("alumnodb");
 					
 				} else {

@@ -47,7 +47,7 @@ public class AlumnoDAO {
 		
 	}
 	
-	public void saveAlumnos (Alumno alumno){
+	public void saveAlumno (Alumno alumno){
 		Connection conn = Conexion.getInstancia().getConexion();
 		
 		//String query = "INSERT into alumno(nombres,apellidos,email) VALUES('"+alumno.getNombres()+"','"+alumno.getApellidos()+"','"+alumno.getEmail()+"')";
@@ -66,7 +66,7 @@ public class AlumnoDAO {
 		}
 	}
 	
-	public void updateAlumnos (Alumno alumno){
+	public void updateAlumno (Alumno alumno){
 		Connection conn = Conexion.getInstancia().getConexion();
 		
 		String query = "UPDATE alumno SET nombres=?,apellidos=?,email=? WHERE id=?";
@@ -85,7 +85,7 @@ public class AlumnoDAO {
 		}
 	}
 	
-	public void deleteAlumnos (Alumno alumno){
+	public void deleteAlumno (Alumno alumno){
 		Connection conn = Conexion.getInstancia().getConexion();
 		
 		String query = "DELETE FROM alumno WHERE id=?";
@@ -102,25 +102,25 @@ public class AlumnoDAO {
 	}
 	
 	
-public List<Alumno> getAlumno(Alumno alumno) {
+public Alumno getAlumno(Alumno alumno) {
 		
-		List<Alumno> datosalumno = Collections.emptyList();
+		//List<Alumno> datosalumno = Collections.emptyList();
 		Connection conn = Conexion.getInstancia().getConexion();
 		
 		String query = "SELECT * FROM alumno WHERE id=?";
-		
+		Alumno alumnoEncontrado = null;
 		try {
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.setInt(1, alumno.getId());
 			ResultSet rs = ps.executeQuery();
-			datosalumno = new ArrayList<>();
-			
+			//datosalumno = new ArrayList<>();
 			while(rs.next()) {
-				alumno.setId(rs.getInt("id"));
-				alumno.setNombres(rs.getString("nombres"));
-				alumno.setApellidos(rs.getString("apellidos"));
-				alumno.setEmail(rs.getString("email"));
-				datosalumno.add(alumno);
+				alumnoEncontrado = new Alumno();
+				alumnoEncontrado.setId(rs.getInt("id"));
+				alumnoEncontrado.setNombres(rs.getString("nombres"));
+				alumnoEncontrado.setApellidos(rs.getString("apellidos"));
+				alumnoEncontrado.setEmail(rs.getString("email"));
+				//datosalumno.add(alumno);
 			}
 			
 			rs.close();
@@ -132,7 +132,7 @@ public List<Alumno> getAlumno(Alumno alumno) {
 		}
 		
 		
-		return datosalumno;
+		return alumnoEncontrado;
 		
 	}
 }
