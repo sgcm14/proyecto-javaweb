@@ -4,3 +4,6 @@
 - Proyecto desarrollado en Java Web con BD en MySQL usando bootstrap;
 - Contiene una tabla que lista a todos los alumnos en la BD
 > Se usó eclipse y HeidiSQL
+
+![](https://raw.githubusercontent.com/sgcm14/proyecto-javaweb/master/doc/lista_Alumnos.png)
+> Pantalla del Proyecto
